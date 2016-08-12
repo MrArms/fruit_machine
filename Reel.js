@@ -1,8 +1,15 @@
 
 function Reel(){
 	
+	PIXI.DisplayObjectContainer.call(this);
+	
 	this.init();		
 }	
+
+Reel.ICON_Y_GAP = 160;
+
+Reel.prototype = Object.create( PIXI.DisplayObjectContainer.prototype );
+Reel.prototype.constructor = Reel;
 					
 Reel.prototype.initialised = null;
 Reel.prototype.iconArray = null;
@@ -28,9 +35,16 @@ Reel.prototype.setInitialValues = function(){
 	
 	for(var i=0; i<View.REEL_VISIBLE_ICONS; i++){
 		
-		var newIndex = Utils.getRandomNumberExcludingSelected(0, View.ICONS.length, iconArray);
+		var newIndex = Utils.getRandomNumberExcludingSelected(0, View.ICONS.length - 1, this.iconArray);
 		
-		iconArray.push(newIndex);
+		var newIcon = new Icon(newIndex);
+		
+		newIcon.x = 0;
+		newIcon.y = (View.REEL_VISIBLE_ICONS - i - 1) * Reel.ICON_Y_GAP;
+						
+		this.iconArray.push(newIcon);
+		
+		this.addChild(newIcon);
 	}		
 	
 	// Set the current target to the "middle" icon on screen
@@ -46,6 +60,10 @@ Reel.prototype.createIcons = function(){
 }	
 	
 Reel.prototype.render = function(){
+	
+}	
+	
+Reel.prototype.update = function(){
 	
 	
 	

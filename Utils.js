@@ -17,7 +17,7 @@ Utils.getRandomNumberExcludingSelected = function(_startNumber, _endNumber, _exc
 	
 	for(var i=_startNumber; i<=_endNumber; i++){
 						
-		if(_excludedNumbers.indexOf(i) !== -1){
+		if(_excludedNumbers.indexOf(i) === -1){
 			
 			newArray.push(i);
 		}
